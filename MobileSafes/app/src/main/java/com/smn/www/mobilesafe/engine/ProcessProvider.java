@@ -127,7 +127,7 @@ public class ProcessProvider {
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
                 //处理异常情况
-                drawable = context.getResources().getDrawable(R.mipmap.ic_launcher);
+                 drawable = context.getResources().getDrawable(R.mipmap.ic_launcher);
                  name=packageName;
                  isSys=true;
             }
@@ -142,7 +142,6 @@ public class ProcessProvider {
             ProcessInfo processInfo = new ProcessInfo(packageName, drawable, name, totalPss, isSys);
             Log.i("aaaaaaa",processInfo.toString());
             processInfos.add(processInfo);
-
         }
         return processInfos;
     }

@@ -37,4 +37,8 @@
         android:layout_height="wrap_content">
         >
     </com.smn.www.mobilesafe.view.Process_item_view>
+    <ListView
+        android:id="@+id/lv_process"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></ListView>
 </LinearLayout>
