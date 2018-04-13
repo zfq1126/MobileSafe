@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:background="#429ed6"
+    android:gravity="center"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/bt_unlock"
+        android:text="未加锁"
+        android:textColor="#5836e1"
+        android:textSize="16sp"
+        android:background="@drawable/shape_unlock_write_bg"
+        android:layout_width="80dp"
+        android:layout_height="40dp" />
+    <Button
+        android:text="已加锁"
+        android:id="@+id/bt_lock"
+        android:textColor="#ffff"
+        android:textSize="16sp"
+        android:background="@drawable/shape_lock_purple_bg"
+        android:layout_width="80dp"
+        android:layout_height="40dp" />
+</LinearLayout>
+    <TextView
+        android:id="@+id/tv_lock_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#b3b6b9"
+        android:padding="5dp"
+        android:text="未加锁"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/lv_unlock"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+        <ListView
+            android:id="@+id/lv_lock"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+        <include layout="@layout/layout_progress"/>
+    </FrameLayout>
+</LinearLayout>

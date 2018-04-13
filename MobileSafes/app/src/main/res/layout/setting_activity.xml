@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mobilesafe="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<TextView
+    android:text="设置中心"
+    style="@style/MyTitle"
+    />
+    <com.smn.www.mobilesafe.view.SettingItemView
+        android:clickable="true"
+        android:id="@+id/siv_update"
+        android:layout_marginTop="15dp"
+        mobilesafe:title="设置自动更新"
+        mobilesafe:isToggle="true"
+        android:background="@drawable/selector_first_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.smn.www.mobilesafe.view.SettingItemView>
+    <com.smn.www.mobilesafe.view.SettingItemView
+        android:background="@drawable/selector_middle_bg"
+        android:id="@+id/siv_show_location"
+        android:clickable="true"
+        mobilesafe:title="归属地显示设置"
+        mobilesafe:isToggle="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.smn.www.mobilesafe.view.SettingItemView>
+
+    <com.smn.www.mobilesafe.view.SettingItemView
+        android:background="@drawable/selector_last_bg"
+        android:id="@+id/siv_location_style"
+        android:clickable="true"
+        mobilesafe:title="归属地风格设置"
+        mobilesafe:isToggle="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.smn.www.mobilesafe.view.SettingItemView>
+</LinearLayout>

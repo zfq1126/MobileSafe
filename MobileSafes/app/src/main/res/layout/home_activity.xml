@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/blue_bkg"
+        android:orientation="horizontal"
+        >
+         <ImageView
+            android:id="@+id/ivlog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/heima"
+          android:layout_marginTop="30dp"
+            />
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp"
+            >
+            <TextView
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="黑马程序员安全卫士"
+                />
+            <com.smn.www.mobilesafe.view.FocusTextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/tv_logtext"
+                android:textColor="#f00"
+                android:textSize="16sp"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:singleLine="true"
+                android:text="黑马程序员安全卫士,时刻保卫你的手机,www.zfq.com.cn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_setting"
+        android:clickable="true"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/selector_setting_bg"
+        android:src="@mipmap/setting"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <GridView
+        android:layout_below="@id/ll_title"
+        android:id="@+id/gv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:horizontalSpacing="5sp"
+        android:verticalSpacing="5dp"
+        ></GridView>
+
+
+</RelativeLayout>

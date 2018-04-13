@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mobilesafe="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+<TextView
+   style="@style/MyTitle"
+    android:text="常用工具"
+    />
+    <ProgressBar
+        android:id="@+id/pb_sms"
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        />
+    <com.smn.www.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_query_location"
+        android:layout_marginTop="20dp"
+        mobilesafe:isToggle="false"
+        mobilesafe:title="归属地查询"
+        android:background="@drawable/selector_first_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.smn.www.mobilesafe.view.SettingItemView>
+    <com.smn.www.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_sms_save"
+        mobilesafe:isToggle="false"
+        mobilesafe:title="短信备份"
+        android:background="@drawable/selector_middle_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.smn.www.mobilesafe.view.SettingItemView>
+
+    <com.smn.www.mobilesafe.view.SettingItemView
+        mobilesafe:isToggle="false"
+        android:id="@+id/siv_sms_backup"
+        mobilesafe:title="短信还原"
+        android:background="@drawable/selector_last_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.smn.www.mobilesafe.view.SettingItemView>
+
+    <com.smn.www.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_programm_lock"
+        android:layout_marginTop="20dp"
+        mobilesafe:isToggle="false"
+        mobilesafe:title="程序锁管理"
+        android:background="@drawable/selector_first_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.smn.www.mobilesafe.view.SettingItemView>
+    <com.smn.www.mobilesafe.view.SettingItemView
+        android:id="@+id/siv_dog_service"
+        mobilesafe:isToggle="true"
+        mobilesafe:title="电子狗服务"
+        android:background="@drawable/selector_last_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.smn.www.mobilesafe.view.SettingItemView>
+</LinearLayout>
