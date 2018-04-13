@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.smn.www.mobilesafe.ShardPreUtils.ServiceUtil;
+import com.smn.www.mobilesafe.service.DogService;
 import com.smn.www.mobilesafe.view.SettingItemView;
 
 import com.smn.www.mobilesafe.ShardPreUtils.SmsUtil;
@@ -33,6 +35,7 @@ public class CommonToolsActivity extends Activity {
     @InjectView(R.id.siv_dog_service)
     SettingItemView sivDogService;
     private ProgressBar pb;
+    private Intent intent;
 
 
     @Override
@@ -130,6 +133,15 @@ public class CommonToolsActivity extends Activity {
                 startActivity(intent1);
                 break;
             case R.id.siv_dog_service:
+                boolean isOpen= ServiceUtil.isRunning(this, DogService.class);
+                Intent intent2= new Intent(this,DogService.class);
+                if (isOpen){
+                    sivDogService.setOpen(false);
+                    stopService(intent2);
+                }else {
+                    sivDogService.setOpen(true);
+                    startService(intent2);
+                }
                 break;
         }
     }

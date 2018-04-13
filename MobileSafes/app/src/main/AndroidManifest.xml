@@ -20,16 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity"></activity>
-        <activity android:name=".SettingActivity"></activity>
-        <activity android:name=".CommonToolsActivity"></activity>
-        <activity android:name=".QueryPhoneActivity"></activity>
-        <activity android:name=".AppLockAcitivity"></activity>
-        <service android:name="com.smn.www.mobilesafe.service.AddressService"></service><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <activity android:name=".HomeActivity"/>
+        <activity android:name=".SettingActivity"/>
+        <activity android:name=".CommonToolsActivity"/>
+        <activity android:name=".QueryPhoneActivity"/>
+        <activity android:name=".AppLockAcitivity"/>
+        <activity android:name=".LockActivity"/>
+        <service android:name=".service.DogService"/>
+        <service android:name=".service.AddressService"/>
     </application>
 
 </manifest>
