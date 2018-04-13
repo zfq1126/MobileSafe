@@ -47,6 +47,7 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></ListView>
-        <include layout="@layout/layout_progress"/>
+        <!--显示加载中的进度条，效果没有实现，暂时注释-->
+       <!-- <include layout="@layout/layout_progress"/>-->
     </FrameLayout>
 </LinearLayout>
