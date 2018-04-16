@@ -308,6 +308,4 @@ public class AppLockAcitivity extends Activity {
                 break;
         }
     }
-
-
 }

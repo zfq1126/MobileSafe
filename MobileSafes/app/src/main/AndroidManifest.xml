@@ -26,6 +26,9 @@
         <activity android:name=".QueryPhoneActivity"/>
         <activity android:name=".AppLockAcitivity"/>
         <activity android:name=".LockActivity"/>
+        <activity android:name=".activity.ProgressManageActivity"/>
+
+
         <service android:name=".service.DogService"/>
         <service android:name=".service.AddressService"/>
     </application>

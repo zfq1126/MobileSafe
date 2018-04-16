@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.smn.www.mobilesafe.activity.ProgressManageActivity;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -64,6 +66,8 @@ public class HomeActivity extends Activity {
                         startActivity(intent);
                         //进程管理
                     case 1:
+                        Intent intent1=new Intent(HomeActivity.this, ProgressManageActivity.class);
+                        startActivity(intent1);
                         //杀毒软件
                     case 2:
                         //功能设置
