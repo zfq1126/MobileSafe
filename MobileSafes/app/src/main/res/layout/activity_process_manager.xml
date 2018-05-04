@@ -37,8 +37,93 @@
         android:layout_height="wrap_content">
         >
     </com.smn.www.mobilesafe.view.Process_item_view>
+     <FrameLayout
+         android:layout_width="match_parent"
+         android:layout_height="0dp"
+         android:layout_weight="1"
+         >
+
     <ListView
         android:id="@+id/lv_process"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+         <SlidingDrawer
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:content="@+id/content"
+             android:handle="@+id/handle"
+             >
+             <RelativeLayout
+                 android:id="@id/handle"
+                 android:background="@mipmap/drawer_bg"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 >
+                 <ImageView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/rocket1"
+                     android:src="@mipmap/drawer_arrow_up"
+                     />
+                 <ImageView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/rocket2"
+                     android:layout_below="@+id/rocket1"
+                     android:src="@mipmap/drawer_arrow_up"
+                     />
+             </RelativeLayout>
+             <LinearLayout
+                 android:id="@id/content"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:background="#fff"
+                 android:orientation="vertical">
+                 <TextView
+                     android:layout_marginTop="5dp"
+                     android:layout_marginBottom="5dp"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="进程管理设置" />
+                 <com.smn.www.mobilesafe.view.SettingItemView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/siv_show_sys"
+                     android:background="@drawable/selector_first_bg"
+                     mobilesafe:title="显示系统进程"
+                     mobilesafe:isToggle="true">
+                 </com.smn.www.mobilesafe.view.SettingItemView>
+                 <com.smn.www.mobilesafe.view.SettingItemView
+                     android:id="@+id/siv_clean_auto"
+                     mobilesafe:title="锁屏自动清理"
+                     android:background="@drawable/selector_last_bg"
+                     mobilesafe:isToggle="true"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content">
+                    </com.smn.www.mobilesafe.view.SettingItemView>
+       </LinearLayout>
+         </SlidingDrawer>
+     </FrameLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <Button
+        android:id="@+id/bt_select_all"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="全选" />
+
+    <Button
+        android:id="@+id/bt_select_reverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="反选" />
+
+  </LinearLayout>
 </LinearLayout>
