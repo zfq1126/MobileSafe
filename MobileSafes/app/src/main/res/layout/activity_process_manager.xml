@@ -14,6 +14,7 @@
             android:text="进程管理" />
 
         <ImageView
+            android:id="@+id/iv_clean_process"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -22,6 +23,7 @@
             android:background="@drawable/selector_clean_bg" />
 
     </RelativeLayout>
+
     <com.smn.www.mobilesafe.view.Process_item_view
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

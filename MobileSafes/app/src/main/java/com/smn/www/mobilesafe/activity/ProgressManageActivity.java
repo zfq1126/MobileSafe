@@ -1,10 +1,14 @@
 package com.smn.www.mobilesafe.activity;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.smn.www.mobilesafe.R;
+import com.smn.www.mobilesafe.ShardPreUtils.SharePreUtils;
 import com.smn.www.mobilesafe.bean.ProcessInfo;
 import com.smn.www.mobilesafe.engine.ProcessProvider;
 import com.smn.www.mobilesafe.view.Process_item_view;
@@ -23,8 +28,9 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
-import static com.smn.www.mobilesafe.R.id.piv_process;
+
 
 /**
  * Created by Administrator on 2018-04-16.
@@ -33,23 +39,27 @@ import static com.smn.www.mobilesafe.R.id.piv_process;
 public class ProgressManageActivity extends Activity {
     private static final int TEXT_ITEM = 0;
     private static final int IMG_TEXT_ITEM = 1;
-    @InjectView(piv_process)
+    private static final String SHOWSYS ="showsys" ;
+    @InjectView(R.id.piv_process)
     Process_item_view pivProcess;
     @InjectView(R.id.piv_memory)
     Process_item_view pivMemory;
     @InjectView(R.id.lv_process)
     ListView lvProcess;
+    @InjectView(R.id.iv_clean_process)
+    ImageView ivCleanProcess;
     @InjectView(R.id.siv_show_sys)
     SettingItemView sivShowSys;
-    @InjectView(R.id.siv_clean_auto)
-    SettingItemView sivCleanAuto;
     @InjectView(R.id.bt_select_all)
     Button btSelectAll;
     @InjectView(R.id.bt_select_reverse)
     Button btSelectReverse;
+
     private int runningProcess;
     private List<ProcessInfo> customList;
     private List<ProcessInfo> systemList;
+    private myAdapter processAdapter;
+    private boolean isShowSys;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +69,13 @@ public class ProgressManageActivity extends Activity {
 
         initTopData();
         initMiddleData();  //用来填充 中间部分 数据
+        
+        //取得已经保存的是否显示系统进程状态的值
+        boolean isShow = SharePreUtils.getBoolean(this, SHOWSYS, true);
+        //给是否显示系统进程的按钮进行初始化操作
+        sivShowSys.setOpen(isShow);
+
+        isShowSys = isShow;
     }
 
     private void initMiddleData() {
@@ -79,24 +96,109 @@ public class ProgressManageActivity extends Activity {
                         customList.add(progressInfo);
                     }
                 }
-                lvProcess.setAdapter(new myAdapter());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        processAdapter = new myAdapter();
+                        lvProcess.setAdapter(processAdapter);
+                        lvProcess.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                                //获取当前点击的条目信息
+                                ProcessInfo item =processAdapter.getItem(position);
+                                //获取当前的clickbox状态值
+                                boolean check = item.isCheck();
+                                //将当前的状态取反
+                                item.setCheck(!check);
+                                //刷新适配器
+                                processAdapter.notifyDataSetChanged();
+                            }
+                        });
+                    }
+                });
+
             }
         }.start();
     }
 
-  /*  @OnClick({R.id.siv_show_sys, R.id.siv_clean_auto, R.id.bt_select_all, R.id.bt_select_reverse})
+    @OnClick({R.id.iv_clean_process, R.id.siv_show_sys, R.id.bt_select_all, R.id.bt_select_reverse})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.siv_show_sys:
+            case R.id.iv_clean_process:
+                // 实现清理 进程的
+                // 首先找到需要清理的 条目集合
+                int count2=processAdapter.getCount();
+                for (int i=0;i<count2;i++){
+                    ProcessInfo  item=processAdapter.getItem(i);
+                    if (item!=null){
+                        if (item.isCheck()){
+                            // 需要被清理的对象  在适配器中被清理出去(不显示)  需要在系统中把该进程杀死
+                            if (customList.contains(item)){
+                                customList.remove(item);
+                            }if (systemList.contains(item)){
+                                systemList.remove(item);
+                            }
+                            ProcessProvider.killProcess(this,item.getPackageName());
+                        }
+                    }
+                }
+                processAdapter.notifyDataSetChanged();
                 break;
-            case R.id.siv_clean_auto:
+            case R.id.siv_show_sys:
+                //当点击了显示系统进程条目结束后，切换图片的状态
+                boolean open = sivShowSys.Open();
+                if (open){//对当前的状态取反
+                    //设置一个变量记录当前是需要显示系统进程还是不显示
+                    isShowSys=false;
+                    //当前状态为绿色，点击后为红色
+                    sivShowSys.setOpen(false);
+                    SharePreUtils.saveBoolean(this,SHOWSYS,false);
+                }else {
+                    //当前是关闭状态，需要变换状态切换成开启的状态
+                    isShowSys=true;
+                    sivShowSys.setOpen(true);
+                    SharePreUtils.saveBoolean(this,SHOWSYS, true);
+                }
+                //刷新适配器
+                processAdapter.notifyDataSetChanged();
                 break;
             case R.id.bt_select_all:
+                // 由于 在适配器中已经实现了判断
+                // 把 当前适配器中 要显示的进程条目  都循环一遍,同时把 当前条目的 checkbox 设置为 true
+                int count = processAdapter.getCount();
+                for (int i=0;i<count;i++){
+                    ProcessInfo item=processAdapter.getItem(i);
+                    if (item!=null){
+                        //当前是图片+文本条目，是有checkbox
+                        if (getPackageName().equals(item.getPackageName())){
+                            continue;//如果是本应用，需要结束此次循环
+                        }else{
+                            item.setCheck(true);
+                        }
+                    }
+                }
+                //刷新适配器
+                processAdapter.notifyDataSetChanged();
                 break;
             case R.id.bt_select_reverse:
+                int count1 = processAdapter.getCount();
+                for (int i=0;i<count1;i++){
+                    ProcessInfo item=processAdapter.getItem(i);
+                    if (item!=null){
+                        //当前是图片+文本条目，是有checkbox
+                        if (getPackageName().equals(item.getPackageName())){
+                            continue;//如果是本应用，需要结束此次循环
+                        }else{
+                            item.setCheck(false);
+                        }
+                    }
+                }
+                //刷新适配器
+                processAdapter.notifyDataSetChanged();
                 break;
         }
-    }*/
+    }
 
     class myAdapter extends BaseAdapter {
 
@@ -117,8 +219,14 @@ public class ProgressManageActivity extends Activity {
 
         @Override
         public int getCount() {
-            // 用户进程数 + 系统进程数 + 2个显示文本条目
-            return customList.size() + systemList.size() + 2;
+            if (isShowSys){
+                // 用户进程数 + 系统进程数 + 2个显示文本条目
+                return customList.size() + systemList.size() + 2;
+            }else {
+                //不显示系统进程，仅仅显示用户进程
+                return customList.size()+1;
+            }
+
         }
 
         @Override

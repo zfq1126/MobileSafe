@@ -13,6 +13,7 @@ import android.os.Debug;
 import android.util.Log;
 
 import com.smn.www.mobilesafe.R;
+import com.smn.www.mobilesafe.activity.ProgressManageActivity;
 import com.smn.www.mobilesafe.bean.ProcessInfo;
 import com.superuser.processmanager.ProcessManager;
 
@@ -144,5 +145,10 @@ public class ProcessProvider {
             processInfos.add(processInfo);
         }
         return processInfos;
+    }
+
+    public static void killProcess(Context context, String packageName) {
+      ActivityManager am= (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+       am.killBackgroundProcesses(packageName);
     }
 }

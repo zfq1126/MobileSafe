@@ -12,6 +12,7 @@ public class ProcessInfo {
     private String name;
     private int intMemory;
     private boolean isSys;
+    private boolean isCheck;
 
     public ProcessInfo(String packageName, Drawable drawable, String name, int intMemory, boolean isSys) {
         this.packageName = packageName;
@@ -34,7 +35,13 @@ public class ProcessInfo {
                 ", isSys=" + isSys +
                 '}';
     }
+    public boolean isCheck() {
+        return isCheck;
+    }
 
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
     public String getPackageName() {
         return packageName;
     }
