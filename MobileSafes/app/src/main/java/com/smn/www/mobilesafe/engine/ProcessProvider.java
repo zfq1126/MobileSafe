@@ -13,7 +13,6 @@ import android.os.Debug;
 import android.util.Log;
 
 import com.smn.www.mobilesafe.R;
-import com.smn.www.mobilesafe.activity.ProgressManageActivity;
 import com.smn.www.mobilesafe.bean.ProcessInfo;
 import com.superuser.processmanager.ProcessManager;
 
@@ -150,5 +149,21 @@ public class ProcessProvider {
     public static void killProcess(Context context, String packageName) {
       ActivityManager am= (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
        am.killBackgroundProcesses(packageName);
+    }
+
+    public static void KillAllProcess(final Context context) {
+    new Thread(){
+        @Override
+        public void run() {
+            ActivityManager am= (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            List<ProcessManager.Process> runningProcesses = ProcessManager.getRunningProcesses();
+            for (ProcessManager.Process process: runningProcesses) {
+                if (!context.getPackageName().equals(process.getPackageName())){
+                    Log.i("aaa",process.getPackageName());
+                    am.killBackgroundProcesses(process.getPackageName());
+                }
+            }
+        }
+    }.start();
     }
 }
