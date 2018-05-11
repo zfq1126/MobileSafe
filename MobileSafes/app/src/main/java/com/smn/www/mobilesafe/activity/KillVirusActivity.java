@@ -98,7 +98,7 @@ public class KillVirusActivity extends Activity {
                 String name = applicationInfo.loadLabel(packageManager).toString();
                 VirusInfo virusInfo = new VirusInfo(name, packageName, drawable, true);
                 publishProgress(virusInfo); //将当前的数据 实时的更新到 Progress
-                SystemClock.sleep(100);
+                SystemClock.sleep(180);
             }
             return null;
         }
