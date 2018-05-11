@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.smn.www.mobilesafe.activity.KillVirusActivity;
 import com.smn.www.mobilesafe.activity.ProgressManageActivity;
 
 import butterknife.ButterKnife;
@@ -70,6 +71,8 @@ public class HomeActivity extends Activity {
                         startActivity(intent1);
                         //杀毒软件
                     case 2:
+                        Intent intent2 = new Intent(HomeActivity.this, KillVirusActivity.class);
+                        startActivity(intent2);
                         //功能设置
                     case 3:
 

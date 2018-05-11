@@ -28,7 +28,7 @@
         <activity android:name=".AppLockAcitivity"/>
         <activity android:name=".LockActivity"/>
         <activity android:name=".activity.ProgressManageActivity"/>
-
+        <activity android:name=".activity.KillVirusActivity"/>
         <service android:name=".service.ClearProcessService"/>
         <service android:name=".service.DogService"/>
         <service android:name=".service.AddressService"/>
